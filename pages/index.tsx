@@ -1,15 +1,9 @@
-import type { NextPage } from "next";
-import { useState, useEffect } from "react";
-import Head from "next/head";
-import { Button } from "@components/atom/Button/Button";
-import Navbar from "@components/Navbar";
-import PasswordForm from "@components/PasswordForm";
 import Modal from "@components/Modal";
-import Image from "next/image";
+import PasswordForm from "@components/PasswordForm";
+import Head from "next/head";
+import { useEffect, useState } from "react";
 
-import background from "@assets/background.svg";
-import security from "@assets/security.jpg";
-
+import type { NextPage } from "next";
 const Home: NextPage = () => {
 	const [uniqueID, setUniqueID] = useState("");
 	const [validInSec, setValidInSec] = useState(0);

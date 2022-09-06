@@ -1,5 +1,5 @@
-import React, { useContext, useState, useEffect } from "react";
 import { secondsToDhms } from "@lib/helpers";
+import React, { useContext, useEffect, useState } from "react";
 
 const Modal = ({ uniqueID, validInSec }) => {
 	const baseURL = process.env.BASEURL || "http://localhost:3000";
@@ -22,7 +22,7 @@ const Modal = ({ uniqueID, validInSec }) => {
 					</h3>
 					<p className="py-4">
 						You can now share the link below with anyone you'd like. Keep in
-						mind, the link will only be valid for {secondsToDhms(validInSec)}{" "}
+						mind, the link will only be valid for {secondsToDhms(validInSec)}
 						and once opened it will be erased forever.
 					</p>
 					<p className="pb-4">
@@ -30,7 +30,7 @@ const Modal = ({ uniqueID, validInSec }) => {
 							href={`${baseURL + "/pwd/" + uniqueID}`}
 							className="text-blue-500"
 						>
-							{`${baseURL + "/pwd/" + uniqueID}`}{" "}
+							{`${baseURL + "/pwd/" + uniqueID}`}
 						</a>
 					</p>
 					<div className="flex justify-end space-x-3">

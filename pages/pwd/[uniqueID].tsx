@@ -1,17 +1,13 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import Link from "next/link";
-import Image from "next/image";
-import { useEffect, useRef } from "react";
-import { Button } from "@components/atom/Button/Button";
-import Navbar from "@components/Navbar";
-import PasswordForm from "@components/PasswordForm";
-import Loading from "@components/Loading";
-import { useRouter } from "next/router";
-import { database } from "@lib/firebaseConfig";
-import { collection, getDoc, doc } from "firebase/firestore";
-import { decryptPass } from "@lib/crypto";
+import Loading from '@components/Loading';
+import { decryptPass } from '@lib/crypto';
+import { database } from '@lib/firebaseConfig';
+import { doc, getDoc } from 'firebase/firestore';
+import Head from 'next/head';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect, useRef } from 'react';
 
+import type { NextPage } from "next";
 const PasswordPage: NextPage = ({ decryptedPass, uniqueID }) => {
 	// Delete password from database
 	fetch("/api/deletePassword", {

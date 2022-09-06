@@ -1,8 +1,8 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import { createUniqueID, hashPass, isPassCorrect } from "@lib/hashing";
 import { encryptPass } from "@lib/crypto";
-import { app, database } from "@lib/firebaseConfig";
-import { collection, addDoc, getDoc, doc } from "firebase/firestore";
+import { database } from "@lib/firebaseConfig";
+import { addDoc, collection } from "firebase/firestore";
+
+import type { NextApiRequest, NextApiResponse } from "next";
 const dbInstance = collection(database, "passwords");
 
 type Data = {

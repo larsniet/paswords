@@ -1,7 +1,6 @@
-import React, { useContext, useState, useEffect } from "react";
 import { ThemeContext } from "@themes/themeContext";
-import * as Themes from "@themes/index";
 import Link from "next/link";
+import React, { useContext, useEffect, useState } from "react";
 
 const Navbar = () => {
 	const { theme, setTheme } = useContext(ThemeContext);
