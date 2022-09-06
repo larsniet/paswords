@@ -8,11 +8,14 @@ import type { AppProps } from "next/app";
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<ThemeContextProvider>
-			<div
-				className="absolute w-screen h-screen rotate-180"
-				style={{ resize: "both" }}
-			>
-				<svg id="visual" viewBox="0 0 900 600" version="1.1">
+			<div className="fixed top-0 left-0 w-full h-full rotate-180">
+				<svg
+					id="visual"
+					preserveAspectRatio="none"
+					viewBox="0 0 900 600"
+					width="100%"
+					height="100%"
+				>
 					<rect x="0" y="0" fill="#001220"></rect>
 					<defs>
 						<linearGradient id="grad1_0" x1="33.3%" y1="100%" x2="100%" y2="0%">

@@ -10,18 +10,18 @@ const Navbar = () => {
 	};
 
 	return (
-		<div className="fixed top-0 navbar">
-			<div className="navbar-start">
+		<div className="fixed top-0 navbar justify-between">
+			<div className="navbar-start w-auto">
 				<div>
 					<Link href="/">
 						<div className="btn btn-ghost normal-case text-3xl">Pasword. </div>
 					</Link>
 				</div>
-				<span className="text-sm ml-5">
+				<span className="text-sm ml-5 hidden sm:block">
 					send and receive passwords the safe way
 				</span>
 			</div>
-			<div className="navbar-end">
+			<div className="navbar-end w-auto">
 				<button
 					type="button"
 					className="btn btn-ghost btn-circle"

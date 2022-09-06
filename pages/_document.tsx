@@ -4,7 +4,7 @@ export default function Document() {
 	return (
 		<Html>
 			<Head />
-			<body style={{ overflow: "hidden" }}>
+			<body className="bg-base-200 overflow-x-hidden">
 				<Main />
 				<NextScript />
 			</body>
