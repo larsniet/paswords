@@ -1,4 +1,4 @@
-const themes = require("./src/Themes/index");
+const themes = require("./src/themes/index");
 module.exports = {
 	content: ["{pages,src}/**/*.{js,ts,jsx,tsx}"],
 	darkMode: "media",
