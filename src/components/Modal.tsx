@@ -21,8 +21,8 @@ const Modal = ({ uniqueID, validInSec }) => {
 						Your password has been safely encrypted!
 					</h3>
 					<p className="py-4">
-						You can now share the link below with anyone you'd like. Keep in
-						mind, the link will only be valid for {secondsToDhms(validInSec)}
+						You can now share the link below with anyone you would like. Keep in
+						mind, the link will only be valid for {secondsToDhms(validInSec)}{" "}
 						and once opened it will be erased forever.
 					</p>
 					<p className="pb-4">
