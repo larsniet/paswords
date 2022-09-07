@@ -17,11 +17,15 @@ export default function handler(
     const docRef = doc(database, "passwords", uniqueID);
 
     // Delete document
-    deleteDoc(docRef)
-        .then(() => {
-            res.status(200).json({ uniqueID });
-        })
-        .catch((error) => {
-            res.status(500).json({ error });
-        });
+    return new Promise<void>((resolve, reject) => {
+        deleteDoc(docRef)
+            .then(() => {
+                res.status(200).json({ uniqueID });
+                resolve();
+            })
+            .catch((error) => {
+                res.status(500).json({ error });
+                reject();
+            });
+    });
 }
