@@ -13,11 +13,12 @@ const Home: NextPage = () => {
         <>
             <Head>
                 <title>
-                    Pasword. The safest way to send passwords over the internet.
+                    Paswords. The safest way to send passwords over the
+                    internet.
                 </title>
                 <meta
                     name="description"
-                    content="Pasword allows users from all over the world to share passwords in a secure way. Using our one-time-only link feature no-one gets access to your password except the people you choose."
+                    content="Paswords allows users from all over the world to share passwords in a secure way. Using our one-time-only link feature no-one gets access to your password except the people you choose."
                 />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
