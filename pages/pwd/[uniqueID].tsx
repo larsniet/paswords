@@ -1,6 +1,6 @@
-import Loading from "@/components/Loading";
-import { decryptPass, CipherType } from "@/lib/crypto";
-import { database } from "@/lib/firebaseConfig";
+import Loading from "@components/Loading";
+import { decryptPass, CipherType } from "@lib/crypto";
+import { database } from "@lib/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 import Head from "next/head";
 import Image from "next/image";

@@ -1,4 +1,4 @@
-import { ThemeContext } from "@/themes/themeContext";
+import { ThemeContext } from "@themes/themeContext";
 import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 

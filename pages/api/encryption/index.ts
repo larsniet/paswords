@@ -1,5 +1,5 @@
-import { encryptPass } from "@/lib/crypto";
-import { database } from "@/lib/firebaseConfig";
+import { encryptPass } from "@lib/crypto";
+import { database } from "@lib/firebaseConfig";
 import { addDoc, collection } from "firebase/firestore";
 
 import type { NextApiRequest, NextApiResponse } from "next";

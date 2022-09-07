@@ -1,5 +1,5 @@
-import Modal from "@/components/Modal";
-import PasswordForm from "@/components/PasswordForm";
+import Modal from "@components/Modal";
+import PasswordForm from "@components/PasswordForm";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 

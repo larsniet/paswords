@@ -1,4 +1,4 @@
-import { secondsToDhms } from "@/lib/helpers";
+import { secondsToDhms } from "@lib/helpers";
 import React, { useContext, useEffect, useState } from "react";
 
 type ModalProps = {

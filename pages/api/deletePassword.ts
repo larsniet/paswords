@@ -1,4 +1,4 @@
-import { database } from "@/lib/firebaseConfig";
+import { database } from "@lib/firebaseConfig";
 import { collection, deleteDoc, doc } from "firebase/firestore";
 
 import type { NextApiRequest, NextApiResponse } from "next";
