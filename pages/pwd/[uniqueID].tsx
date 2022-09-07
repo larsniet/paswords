@@ -9,7 +9,7 @@ import { useEffect, useRef } from "react";
 
 import type { NextPage } from "next";
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
 type PasswordPageProps = {
     uniqueID: string;
