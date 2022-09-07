@@ -58,12 +58,7 @@ const PasswordPage: NextPage<PasswordPageProps> = ({
     return (
         <>
             <Head>
-                <title>Test</title>
-                <meta
-                    name="description"
-                    content="Pasword allows users from all over the world to share passwords in a secure way. Using our one-time-only link feature no-one gets access to your password except the people you choose."
-                />
-                <link rel="icon" href="/favicon.ico" />
+                <title>You made it! Here is your password</title>
             </Head>
             <div className="hero bg-base-200 items-start sm:items-center">
                 <div className="hero-content flex-col">

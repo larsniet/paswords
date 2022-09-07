@@ -20,7 +20,6 @@ const Home: NextPage = () => {
                     name="description"
                     content="Paswords allows users from all over the world to share passwords in a secure way. Using our one-time-only link feature no-one gets access to your password except the people you choose."
                 />
-                <link rel="icon" href="/favicon.ico" />
             </Head>
             <div className="hero items-start sm:items-center">
                 <div className="hero-content flex-col lg:flex-row">
