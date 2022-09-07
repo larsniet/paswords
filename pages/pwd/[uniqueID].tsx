@@ -65,7 +65,7 @@ const PasswordPage: NextPage<PasswordPageProps> = ({
                 />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <div className="hero min-h-screen bg-base-200">
+            <div className="hero bg-base-200 items-start sm:items-center">
                 <div className="hero-content flex-col">
                     <div className="card lg:card-side bg-base-100 shadow-xl">
                         <div className="card-body max-w-md">

@@ -22,7 +22,7 @@ const Home: NextPage = () => {
                 />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <div className="hero min-h-screen">
+            <div className="hero items-start sm:items-center">
                 <div className="hero-content flex-col lg:flex-row">
                     <div>
                         <h1 className="text-5xl font-bold">One Time Link</h1>

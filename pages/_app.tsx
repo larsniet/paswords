@@ -115,12 +115,10 @@ function MyApp({ Component, pageProps }: AppProps) {
                     </g>
                 </svg>
             </div>
-            <div className="min-h-screen">
-                <Navbar />
-                <main className="flex flex-col">
-                    <Component {...pageProps} />
-                </main>
-            </div>
+            <Navbar />
+            <main className="flex flex-col pt-20 sm:pt-0 min-h-screen justify-center">
+                <Component {...pageProps} />
+            </main>
         </ThemeContextProvider>
     );
 }
