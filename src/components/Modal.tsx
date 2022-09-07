@@ -23,6 +23,9 @@ const Modal: React.ElementType<ModalProps> = ({ uniqueID, validInSec }) => {
 
     return (
         <>
+            <label htmlFor="success-modal" className="hidden">
+                Toggling Modal
+            </label>
             <input
                 type="checkbox"
                 id="success-modal"

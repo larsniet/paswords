@@ -1,6 +1,6 @@
 import { ThemeContext } from "@themes/themeContext";
 import Link from "next/link";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 
 const Navbar = () => {
     const { theme, setTheme } = useContext(ThemeContext);
@@ -15,7 +15,7 @@ const Navbar = () => {
                 <div>
                     <Link href="/">
                         <div className="btn btn-ghost normal-case text-3xl">
-                            Paswords.{" "}
+                            Paswords.
                         </div>
                     </Link>
                 </div>
@@ -26,6 +26,7 @@ const Navbar = () => {
             <div className="navbar-end w-auto">
                 <button
                     type="button"
+                    aria-label="Toggle Dark Mode"
                     className="btn btn-ghost btn-circle"
                     onClick={(e) => toggleTheme(e)}
                 >
