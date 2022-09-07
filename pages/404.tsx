@@ -16,7 +16,7 @@ const NotFound: NextPage = () => {
                 <div className="xl:pt-24 w-full xl:w-1/2 relative pb-12 lg:pb-0 h-64">
                     <div className="absolute z-10">
                         <h1 className="my-2 font-bold text-2xl">
-                            Looks like you've found the doorway to the great
+                            Looks like you have found the doorway to the great
                             nothing
                         </h1>
                         <p className="my-2">
