@@ -23,7 +23,7 @@ const Modal: React.ElementType<ModalProps> = ({ uniqueID, validInSec }) => {
 
     return (
         <>
-            <label htmlFor="success-modal" className="hidden">
+            <label htmlFor="success-modal" style={{ opacity: 0 }}>
                 Toggling Modal
             </label>
             <input

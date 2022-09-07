@@ -10,7 +10,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className="fixed top-0 navbar justify-between">
+        <div className="fixed top-0 navbar justify-between z-10">
             <div className="navbar-start w-auto">
                 <div>
                     <Link href="/">
