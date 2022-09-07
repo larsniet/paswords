@@ -1,12 +1,12 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import { createUniqueID, hashPass, isPassCorrect } from "@lib/hashing";
-import { encryptPass } from "@lib/crypto";
-import { database } from "@lib/firebaseConfig";
+import { database } from "@/lib/firebaseConfig";
 import { collection, deleteDoc, doc } from "firebase/firestore";
+
+import type { NextApiRequest, NextApiResponse } from "next";
 const dbInstance = collection(database, "passwords");
 
 type Data = {
-	uniqueID: string;
+	uniqueID?: string;
+	error?: string;
 };
 
 export default function handler(

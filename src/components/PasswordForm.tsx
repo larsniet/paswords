@@ -1,5 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 
+type PasswordFormProps = {
+	setUniqueID: (id: string) => void;
+	setValidInSec: (validInSec: number) => void;
+};
+
 const validTimeMapping = {
 	0: 600,
 	25: 3600,
@@ -8,11 +13,14 @@ const validTimeMapping = {
 	100: 259200,
 };
 
-const PasswordForm = ({ setUniqueID, setValidInSec }) => {
-	const [error, setError] = useState("");
-	const [charCount, setCharCount] = useState(0);
-	const [password, setPassword] = useState("");
-	const [validTime, setValidTime] = useState(25);
+const PasswordForm: React.ElementType<PasswordFormProps> = ({
+	setUniqueID,
+	setValidInSec,
+}) => {
+	const [error, setError] = useState<string>("");
+	const [charCount, setCharCount] = useState<number>(0);
+	const [password, setPassword] = useState<string>("");
+	const [validTime, setValidTime] = useState<number>(25);
 
 	const handleInputChange = (e) => {
 		setPassword(e.target.value.replace(/\s/g, ""));
@@ -80,7 +88,7 @@ const PasswordForm = ({ setUniqueID, setValidInSec }) => {
 							max="100"
 							className="range"
 							step="25"
-							onChange={(e) => setValidTime(e.target.value)}
+							onChange={(e) => setValidTime(parseInt(e.target.value))}
 							value={validTime}
 						/>
 						<div className="w-full flex justify-between text-xs px-2">

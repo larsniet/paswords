@@ -1,13 +1,13 @@
-import { encryptPass } from "@lib/crypto";
-import { database } from "@lib/firebaseConfig";
+import { encryptPass } from "@/lib/crypto";
+import { database } from "@/lib/firebaseConfig";
 import { addDoc, collection } from "firebase/firestore";
 
 import type { NextApiRequest, NextApiResponse } from "next";
 const dbInstance = collection(database, "passwords");
 
 type Data = {
-	password: string;
-	validInSec: number;
+	uniqueID?: string;
+	error?: string;
 };
 
 export default function handler(
@@ -22,10 +22,15 @@ export default function handler(
 	addDoc(dbInstance, {
 		encryptedPass,
 		validInSec,
-	}).then((docRef) => {
-		// Get the unique ID from the document reference
-		const uniqueID = docRef.id;
-		// Send uniqueID to client
-		res.status(200).json({ uniqueID });
-	});
+	})
+		.then((docRef) => {
+			// Get the unique ID from the document reference
+			const uniqueID = docRef.id;
+			// Send uniqueID to client
+			res.status(200).json({ uniqueID });
+		})
+		.catch((error) => {
+			// Send error to client
+			res.status(500).json({ error });
+		});
 }

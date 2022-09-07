@@ -1,13 +1,13 @@
-import Modal from "@components/Modal";
-import PasswordForm from "@components/PasswordForm";
+import Modal from "@/components/Modal";
+import PasswordForm from "@/components/PasswordForm";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 
 import type { NextPage } from "next";
 
 const Home: NextPage = () => {
-	const [uniqueID, setUniqueID] = useState("");
-	const [validInSec, setValidInSec] = useState(0);
+	const [uniqueID, setUniqueID] = useState<string>("");
+	const [validInSec, setValidInSec] = useState<number>(0);
 
 	return (
 		<>

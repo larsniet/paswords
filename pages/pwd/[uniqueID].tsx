@@ -1,14 +1,23 @@
-import Loading from '@components/Loading';
-import { decryptPass } from '@lib/crypto';
-import { database } from '@lib/firebaseConfig';
-import { doc, getDoc } from 'firebase/firestore';
-import Head from 'next/head';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useEffect, useRef } from 'react';
+import Loading from "@/components/Loading";
+import { decryptPass, CipherType } from "@/lib/crypto";
+import { database } from "@/lib/firebaseConfig";
+import { doc, getDoc } from "firebase/firestore";
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useRef } from "react";
 
 import type { NextPage } from "next";
-const PasswordPage: NextPage = ({ decryptedPass, uniqueID }) => {
+
+type PasswordPageProps = {
+	uniqueID: string;
+	decryptedPass: string;
+};
+
+const PasswordPage: NextPage<PasswordPageProps> = ({
+	uniqueID,
+	decryptedPass,
+}) => {
 	// Delete password from database
 	fetch("/api/deletePassword", {
 		method: "POST",
@@ -104,7 +113,8 @@ export const getServerSideProps = async (ctx) => {
 	const data = docSnap.data();
 
 	if (!data) return { notFound: true };
-	const decryptedPass = decryptPass(data.encryptedPass);
+	const cipher = data.encryptedPass as CipherType;
+	const decryptedPass = decryptPass(cipher);
 
 	return { props: { decryptedPass, uniqueID } };
 };

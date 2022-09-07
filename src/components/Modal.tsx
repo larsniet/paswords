@@ -1,14 +1,23 @@
-import { secondsToDhms } from "@lib/helpers";
+import { secondsToDhms } from "@/lib/helpers";
 import React, { useContext, useEffect, useState } from "react";
 
-const Modal = ({ uniqueID, validInSec }) => {
+type ModalProps = {
+	uniqueID: string;
+	validInSec: number;
+};
+
+const Modal: React.ElementType<ModalProps> = ({ uniqueID, validInSec }) => {
 	const baseURL = process.env.BASEURL || "http://localhost:3000";
 
 	useEffect(() => {
-		if (uniqueID && validInSec) {
-			document.getElementById("success-modal").checked = true;
+		// Get the modal
+		const modal = document.getElementById(
+			"success-modal"
+		) as HTMLInputElement | null;
+		if (uniqueID && validInSec && modal) {
+			modal.checked = true;
 		} else {
-			document.getElementById("success-modal").checked = false;
+			modal.checked = false;
 		}
 	}, [uniqueID, validInSec]);
 
