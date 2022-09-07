@@ -9,6 +9,26 @@ type ModalProps = {
 const Modal: React.ElementType<ModalProps> = ({ uniqueID, validInSec }) => {
     const baseURL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
+    const toggleModal = () => {
+        const modal = document.getElementById(
+            "success-modal"
+        ) as HTMLInputElement | null;
+        modal.checked = !modal.checked;
+    };
+
+    const copyToClipboard = (e) => {
+        // Write to clipboard and show notification
+        navigator.clipboard.writeText(`${baseURL}/pwd/${uniqueID}`);
+        e.target.innerHTML = "Copied!";
+        e.target.classList.add("btn-success");
+
+        // After 2 seconds, change the text back
+        setTimeout(() => {
+            e.target.classList.remove("btn-success");
+            e.target.innerHTML = "Copy URL";
+        }, 2000);
+    };
+
     useEffect(() => {
         // Get the modal
         const modal = document.getElementById(
@@ -32,7 +52,7 @@ const Modal: React.ElementType<ModalProps> = ({ uniqueID, validInSec }) => {
                 className="modal-toggle"
             />
             <div className="modal modal-bottom sm:modal-middle">
-                <div className="modal-box">
+                <div className="modal-box w-full">
                     <h3 className="font-bold text-lg">
                         Your password has been safely encrypted!
                     </h3>
@@ -42,17 +62,19 @@ const Modal: React.ElementType<ModalProps> = ({ uniqueID, validInSec }) => {
                         {secondsToDhms(validInSec)} and once opened it will be
                         erased forever.
                     </p>
-                    <p className="pb-4">
-                        <a
-                            href={`${baseURL + "/pwd/" + uniqueID}`}
-                            className="text-blue-500"
-                        >
-                            {`${baseURL + "/pwd/" + uniqueID}`}
-                        </a>
-                    </p>
+                    <p className="pb-4 break-all text-blue-500">{`${
+                        baseURL + "/pwd/" + uniqueID
+                    }`}</p>
                     <div className="flex justify-end space-x-3">
-                        <button className="btn btn-ghost">Cancel</button>
-                        <button className="btn btn-primary">Copy</button>
+                        <button className="btn btn-ghost" onClick={toggleModal}>
+                            Okay
+                        </button>
+                        <button
+                            className="btn btn-primary"
+                            onClick={(e) => copyToClipboard(e)}
+                        >
+                            Copy URL
+                        </button>
                     </div>
                 </div>
             </div>
