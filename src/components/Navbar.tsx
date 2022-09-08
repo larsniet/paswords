@@ -53,7 +53,7 @@ const Navbar = () => {
                     </div>
                 </button>
                 <a
-                    rel="noopener"
+                    rel="noopener noreferrer"
                     aria-label="Github project link"
                     className="btn btn-ghost btn-circle"
                     target="_blank"
