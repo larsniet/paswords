@@ -35,7 +35,17 @@ const Home: NextPage = () => {
                         <p>
                             We use some of the most advanced encryption
                             algorithms to make sure your password is safe. We do
-                            not store your password in any way.
+                            not store your password in any way. If you would
+                            like to know exactly what happens to your password,
+                            make sure to check out{" "}
+                            <a
+                                href="https://github.com/larsniet/paswords"
+                                target="_blank"
+                                className="text-primary"
+                            >
+                                the public Github repository
+                            </a>
+                            .
                         </p>
                     </div>
                     <PasswordForm
