@@ -54,6 +54,7 @@ const PasswordForm: React.ElementType<PasswordFormProps> = ({
 
         setUniqueID(uniqueID);
         setValidInSec(validInSec);
+        setPassword("");
         setLoading(false);
     };
 
