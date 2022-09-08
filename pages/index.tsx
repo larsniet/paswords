@@ -39,6 +39,7 @@ const Home: NextPage = () => {
                             like to know exactly what happens to your password,
                             make sure to check out{" "}
                             <a
+                                rel="noopener"
                                 href="https://github.com/larsniet/paswords"
                                 target="_blank"
                                 className="text-primary"

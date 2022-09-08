@@ -51,8 +51,11 @@ const Modal: React.ElementType<ModalProps> = ({ uniqueID, validInSec }) => {
                 id="success-modal"
                 className="modal-toggle"
             />
-            <div className="modal modal-bottom sm:modal-middle">
-                <div className="modal-box w-full">
+            <label
+                htmlFor="success-modal"
+                className="modal modal-bottom sm:modal-middle"
+            >
+                <label className="modal-box w-full relative" htmlFor="">
                     <h3 className="font-bold text-lg">
                         Your password has been safely encrypted!
                     </h3>
@@ -76,8 +79,8 @@ const Modal: React.ElementType<ModalProps> = ({ uniqueID, validInSec }) => {
                             Copy URL
                         </button>
                     </div>
-                </div>
-            </div>
+                </label>
+            </label>
         </>
     );
 };

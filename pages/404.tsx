@@ -37,6 +37,7 @@ const NotFound: NextPage = () => {
                 <div className="w-auto md:w-96">
                     <Image
                         src={Image404}
+                        alt="404 error image"
                         width={700}
                         height={500}
                         quality={100}
