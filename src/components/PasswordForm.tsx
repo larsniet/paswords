@@ -21,6 +21,7 @@ const PasswordForm: React.ElementType<PasswordFormProps> = ({
     const [charCount, setCharCount] = useState<number>(0);
     const [password, setPassword] = useState<string>("");
     const [validTime, setValidTime] = useState<number>(25);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const handleInputChange = (e) => {
         setPassword(e.target.value.replace(/\s/g, ""));
@@ -29,6 +30,8 @@ const PasswordForm: React.ElementType<PasswordFormProps> = ({
     };
 
     const generate = async () => {
+        setLoading(true);
+
         if (password === "") {
             return setError("Password cannot be empty");
         }
@@ -51,6 +54,7 @@ const PasswordForm: React.ElementType<PasswordFormProps> = ({
 
         setUniqueID(uniqueID);
         setValidInSec(validInSec);
+        setLoading(false);
     };
 
     return (
@@ -69,6 +73,7 @@ const PasswordForm: React.ElementType<PasswordFormProps> = ({
                             value={password}
                             onChange={(e) => handleInputChange(e)}
                             placeholder="This is my super secret password"
+                            disabled={loading}
                             className={`input input-bordered w-full ${
                                 error ? "input-error" : ""
                             }`}
@@ -95,6 +100,7 @@ const PasswordForm: React.ElementType<PasswordFormProps> = ({
                             max="100"
                             className="range"
                             step="25"
+                            disabled={loading}
                             onChange={(e) =>
                                 setValidTime(parseInt(e.target.value))
                             }
@@ -111,7 +117,9 @@ const PasswordForm: React.ElementType<PasswordFormProps> = ({
                     <div className="form-control w-full mt-8">
                         <button
                             onClick={() => generate()}
-                            className="btn btn-primary"
+                            className={`btn btn-primary ${
+                                loading ? "loading" : ""
+                            }`}
                         >
                             Generate link
                         </button>
