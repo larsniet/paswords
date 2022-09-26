@@ -15,9 +15,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         <ThemeContextProvider>
             <Script
                 strategy="lazyOnload"
+                id="gtagImport"
                 src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}
             />
-            <Script strategy="lazyOnload">
+            <Script strategy="lazyOnload" id="gtagLoader">
                 {`
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments);}
