@@ -3,22 +3,26 @@ import "../styles/globals.css";
 import Navbar from "@components/Navbar";
 import { ThemeContextProvider } from "@themes/themeContext";
 import Script from "next/script";
+import ReactGA from "react-ga";
 
 import type { AppProps } from "next/app";
 
 function MyApp({ Component, pageProps }: AppProps) {
+    const measurementId = process.env.NEXT_PUBLIC_MEASUREMENT_ID;
+    ReactGA.initialize(measurementId);
+
     return (
         <ThemeContextProvider>
             <Script
                 strategy="lazyOnload"
-                src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_MEASUREMENT_ID}`}
+                src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}
             />
             <Script strategy="lazyOnload">
                 {`
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments);}
                     gtag('js', new Date());
-                    gtag('config', '${process.env.NEXT_PUBLIC_MEASUREMENT_ID}', {
+                    gtag('config', '${measurementId}', {
                     page_path: window.location.pathname,
                     });
                 `}

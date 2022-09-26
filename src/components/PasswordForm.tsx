@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
+import ReactGA from "react-ga";
 
 type PasswordFormProps = {
     setUniqueID: (id: string) => void;
@@ -31,6 +32,12 @@ const PasswordForm: React.ElementType<PasswordFormProps> = ({
 
     const generate = async () => {
         setLoading(true);
+
+        ReactGA.event({
+            category: "Home",
+            action: "create_password_link",
+            label: "Create Password Link",
+        });
 
         if (password === "") {
             return setError("Password cannot be empty");
