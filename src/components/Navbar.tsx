@@ -5,7 +5,7 @@ import React, { useContext } from "react";
 const Navbar = () => {
     const { theme, setTheme } = useContext(ThemeContext);
 
-    const toggleTheme = (e) => {
+    const toggleTheme = () => {
         setTheme(theme === "dark" ? "light" : "dark");
     };
 
@@ -28,7 +28,7 @@ const Navbar = () => {
                     type="button"
                     aria-label="Toggle Dark Mode"
                     className="btn btn-ghost btn-circle"
-                    onClick={(e) => toggleTheme(e)}
+                    onClick={() => toggleTheme()}
                 >
                     <div
                         className={`swap swap-rotate pointer-events-none ${

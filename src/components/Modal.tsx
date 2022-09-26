@@ -16,7 +16,7 @@ const Modal: React.ElementType<ModalProps> = ({ uniqueID, validInSec }) => {
         modal.checked = !modal.checked;
     };
 
-    const copyToClipboard = (e) => {
+    const copyToClipboard = (e: any) => {
         // Write to clipboard and show notification
         navigator.clipboard.writeText(`${baseURL}/pwd/${uniqueID}`);
         e.target.innerHTML = "Copied!";

@@ -1,5 +1,5 @@
 import Loading from "@components/Loading";
-import { decryptPass, CipherType } from "@lib/crypto";
+import { CipherType, decryptPass } from "@lib/crypto";
 import { database } from "@lib/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 import Head from "next/head";
@@ -12,25 +12,10 @@ import type { NextPage } from "next";
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
 type PasswordPageProps = {
-    uniqueID: string;
     decryptedPass: string;
 };
 
-const PasswordPage: NextPage<PasswordPageProps> = ({
-    uniqueID,
-    decryptedPass,
-}) => {
-    // Delete password from database
-    fetch(baseUrl + "/api/deletePassword", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            uniqueID,
-        }),
-    });
-
+const PasswordPage: NextPage<PasswordPageProps> = ({ decryptedPass }) => {
     // This fixes an issue with NextJS images using inline-block
     const imgRef = useRef(null);
     useEffect(() => {
@@ -42,7 +27,7 @@ const PasswordPage: NextPage<PasswordPageProps> = ({
         return <Loading />;
     }
 
-    const copyToClipboard = (e) => {
+    const copyToClipboard = (e: any) => {
         // Write to clipboard and show notification
         navigator.clipboard.writeText(decryptedPass);
         e.target.innerHTML = "Copied to clipboard!";
@@ -105,17 +90,41 @@ const PasswordPage: NextPage<PasswordPageProps> = ({
     );
 };
 
-export const getServerSideProps = async (ctx) => {
+export const getServerSideProps = async (ctx: { query: { uniqueID: any } }) => {
     const uniqueID = ctx.query.uniqueID;
     const docRef = doc(database, "passwords", uniqueID);
     const docSnap = await getDoc(docRef);
     const data = docSnap.data();
 
+    // If the password is not found, return notFound
     if (!data) return { notFound: true };
+
+    // Decrypt the password
     const cipher = data.encryptedPass as CipherType;
     const decryptedPass = decryptPass(cipher);
 
-    return { props: { decryptedPass, uniqueID } };
+    /* 
+        Delete password from database
+        This is done server-side to prevent the password from being accessed again
+    */
+    await fetch(baseUrl + "/api/deletePassword", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            uniqueID,
+        }),
+    }).then((res) => {
+        if (res.status !== 200) {
+            // If the password is not deleted, return notFound to prevent access
+            return {
+                notFound: true,
+            };
+        }
+    });
+
+    return { props: { decryptedPass } };
 };
 
 export default PasswordPage;

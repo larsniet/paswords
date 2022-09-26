@@ -23,7 +23,7 @@ const PasswordForm: React.ElementType<PasswordFormProps> = ({
     const [validTime, setValidTime] = useState<number>(25);
     const [loading, setLoading] = useState<boolean>(false);
 
-    const handleInputChange = (e) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(e.target.value.replace(/\s/g, ""));
         setCharCount(e.target.value.length);
         setError("");
