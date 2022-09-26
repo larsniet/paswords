@@ -1,10 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
-import Image from "next/image";
 
 import type { NextPage } from "next";
-
-import Image404 from "@assets/404.png";
 
 const NotFound: NextPage = () => {
     return (
@@ -13,13 +10,13 @@ const NotFound: NextPage = () => {
                 <title>Woops that link is not valid</title>
             </Head>
             <div className="lg:px-24 md:px-44 px-4 flex flex-col-reverse lg:flex-row justify-center">
-                <div className="xl:pt-24 w-full xl:w-1/2 relative pb-12 lg:pb-0 h-64">
+                <div className="w-full xl:w-1/2 relative pb-12 lg:pb-0 h-64">
                     <div className="absolute z-10">
-                        <h1 className="my-2 font-bold text-2xl">
+                        <h1 className="my-2 font-bold text-2xl md:text-4xl">
                             Looks like you have found the doorway to the great
                             nothing
                         </h1>
-                        <p className="my-2">
+                        <p className="my-2 md:text-xl">
                             Sorry about that! The link to your password is
                             either invalid or has expired.
                         </p>
@@ -33,15 +30,6 @@ const NotFound: NextPage = () => {
                     >
                         404
                     </div>
-                </div>
-                <div className="w-auto md:w-96">
-                    <Image
-                        src={Image404}
-                        alt="404 error image"
-                        width={700}
-                        height={500}
-                        quality={100}
-                    />
                 </div>
             </div>
         </>
