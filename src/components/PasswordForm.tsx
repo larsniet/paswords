@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ReactGA from "react-ga";
+import { useEffect } from "react";
 
 type PasswordFormProps = {
     setUniqueID: (id: string) => void;
@@ -24,13 +25,55 @@ const PasswordForm: React.ElementType<PasswordFormProps> = ({
     const [validTime, setValidTime] = useState<number>(25);
     const [loading, setLoading] = useState<boolean>(false);
 
+    const [isGenerating, setIsGenerating] = useState<boolean>(false);
+    const [passwordLength, setPasswordLength] = useState<number>(30);
+    const [passwordType, setPasswordType] = useState<string>(
+        "symbols and numbers"
+    );
+    const [lengthHintClass, setLengthHintClass] = useState<string>("");
+
+    useEffect(() => {
+        if (passwordLength <= 12) {
+            setLengthHintClass("text-error");
+        } else if (passwordLength < 25) {
+            setLengthHintClass("text-warning");
+        } else {
+            setLengthHintClass("text-success");
+        }
+    }, [passwordLength]);
+
+    useEffect(() => {
+        setCharCount(password.length);
+    }, [password]);
+
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(e.target.value.replace(/\s/g, ""));
-        setCharCount(e.target.value.length);
         setError("");
     };
 
-    const generate = async () => {
+    const generatePassword = async () => {
+        setIsGenerating(true);
+
+        // Generates a random password
+        const randomPassword = await fetch(
+            process.env.NEXT_PUBLIC_BASE_URL + "/api/generatePassword",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    length: passwordLength,
+                    type: passwordType,
+                }),
+            }
+        ).then((res) => res.json());
+        setPassword(randomPassword);
+
+        setIsGenerating(false);
+    };
+
+    const generateLink = async () => {
         setLoading(true);
 
         ReactGA.event({
@@ -40,6 +83,7 @@ const PasswordForm: React.ElementType<PasswordFormProps> = ({
         });
 
         if (password === "") {
+            setLoading(false);
             return setError("Password cannot be empty");
         }
 
@@ -72,8 +116,18 @@ const PasswordForm: React.ElementType<PasswordFormProps> = ({
                     <div className="form-control w-full">
                         <label className="label">
                             <span className="label-text">
-                                Fill in your password
+                                Fill in your password, or...
                             </span>
+                            <button
+                                onClick={() => generatePassword()}
+                                className={`btn btn-primary text-xs py-0 h-8 min-h-0 ${
+                                    isGenerating ? "loading" : ""
+                                }`}
+                            >
+                                {isGenerating
+                                    ? "Generating..."
+                                    : "Generate password"}
+                            </button>
                         </label>
                         <input
                             type="text"
@@ -86,15 +140,73 @@ const PasswordForm: React.ElementType<PasswordFormProps> = ({
                                 error ? "input-error" : ""
                             }`}
                         />
-                        <label className="label">
+                        <label className="label pb-0">
                             <span className="label-text-alt text-error">
                                 {error}
                             </span>
                             <span className="label-text-alt">
-                                {charCount}/100
+                                {charCount}/50
                             </span>
                         </label>
                     </div>
+
+                    {/* Start password customizer */}
+                    <div className="form-control">
+                        <div className="form-control">
+                            <label htmlFor="passwordLength" className="label">
+                                <span className="label-text">
+                                    Password length (
+                                    <span className={lengthHintClass}>
+                                        {passwordLength} characters
+                                    </span>
+                                    )
+                                </span>
+                            </label>
+                            <input
+                                id="passwordLength"
+                                type="range"
+                                min="10"
+                                max="50"
+                                className="range"
+                                step="2"
+                                disabled={loading}
+                                onChange={(e) =>
+                                    setPasswordLength(parseInt(e.target.value))
+                                }
+                                value={passwordLength}
+                            />
+                            <div className="w-full flex justify-between text-xs px-2">
+                                <span className="mt-2">10</span>
+                                <span className="mt-2">20</span>
+                                <span className="mt-2">30</span>
+                                <span className="mt-2">40</span>
+                                <span className="mt-2">50</span>
+                            </div>
+                        </div>
+                        <div className="form-control my-2">
+                            <label className="label">
+                                <span className="label-text">
+                                    Special characters
+                                </span>
+                            </label>
+                            <select
+                                className="select w-full bg-slate-50"
+                                value={passwordType}
+                                onChange={(e) =>
+                                    setPasswordType(e.target.value)
+                                }
+                            >
+                                <option selected value="symbols and numbers">
+                                    Symbols and numbers
+                                </option>
+                                <option>None</option>
+                                <option value="symbols">Symbols</option>
+                                <option value="numbers">Numbers</option>
+                            </select>
+                        </div>
+                    </div>
+                    {/* End password customizer */}
+
                     <div className="form-control">
                         <label htmlFor="validTime" className="label">
                             <span className="label-text">
@@ -124,7 +236,7 @@ const PasswordForm: React.ElementType<PasswordFormProps> = ({
                     </div>
                     <div className="form-control w-full mt-8">
                         <button
-                            onClick={() => generate()}
+                            onClick={() => generateLink()}
                             className={`btn btn-primary ${
                                 loading ? "loading" : ""
                             }`}
