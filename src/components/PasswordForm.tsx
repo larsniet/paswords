@@ -191,12 +191,12 @@ const PasswordForm: React.ElementType<PasswordFormProps> = ({
                             </label>
                             <select
                                 className="select w-full bg-slate-50"
-                                value={passwordType}
+                                defaultValue={passwordType}
                                 onChange={(e) =>
                                     setPasswordType(e.target.value)
                                 }
                             >
-                                <option selected value="symbols and numbers">
+                                <option value="symbols and numbers">
                                     Symbols and numbers
                                 </option>
                                 <option>None</option>
