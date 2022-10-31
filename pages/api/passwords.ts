@@ -7,7 +7,6 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    // Create get, post, put, delete functions
     const { method } = req;
 
     switch (method) {

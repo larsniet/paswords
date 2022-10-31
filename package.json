@@ -1,35 +1,35 @@
 {
-  "name": "pasword-link",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "crypto": "^1.0.1",
-    "firebase": "^9.9.3",
-    "next": "12.2.0",
-    "next-pwa": "^5.6.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-ga": "^3.3.1"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.19.1",
-    "@types/node": "18.0.0",
-    "@types/react": "18.0.14",
-    "@types/react-dom": "18.0.5",
-    "autoprefixer": "^10.4.7",
-    "daisyui": "^2.17.0",
-    "eslint": "8.18.0",
-    "eslint-config-next": "12.2.0",
-    "postcss": "^8.4.14",
-    "prop-types": "^15.8.1",
-    "tailwindcss": "^3.1.4",
-    "typescript": "4.7.4",
-    "webpack": "^5.74.0"
-  }
+    "name": "paswords",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint"
+    },
+    "dependencies": {
+        "crypto": "^1.0.1",
+        "firebase": "^9.9.3",
+        "next": "12.2.0",
+        "next-pwa": "^5.6.0",
+        "react": "18.2.0",
+        "react-dom": "18.2.0",
+        "react-ga": "^3.3.1"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.19.1",
+        "@types/node": "18.0.0",
+        "@types/react": "18.0.14",
+        "@types/react-dom": "18.0.5",
+        "autoprefixer": "^10.4.7",
+        "daisyui": "^2.17.0",
+        "eslint": "8.18.0",
+        "eslint-config-next": "12.2.0",
+        "postcss": "^8.4.14",
+        "prop-types": "^15.8.1",
+        "tailwindcss": "^3.1.4",
+        "typescript": "4.7.4",
+        "webpack": "^5.74.0"
+    }
 }
