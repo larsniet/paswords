@@ -5,7 +5,7 @@ import { doc, getDoc } from "firebase/firestore";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState, MouseEvent } from "react";
 
 import type { NextPage } from "next";
 
@@ -13,9 +13,16 @@ const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
 type PasswordPageProps = {
     decryptedPass: string;
+    uniqueID: string;
 };
 
-const PasswordPage: NextPage<PasswordPageProps> = ({ decryptedPass }) => {
+const PasswordPage: NextPage<PasswordPageProps> = ({
+    decryptedPass,
+    uniqueID,
+}) => {
+    const [pass, setPass] = useState<string>("Click to reveal and copy");
+    const [hasPressed, setHasPressed] = useState<boolean>(false);
+
     // This fixes an issue with NextJS images using inline-block
     const imgRef = useRef(null);
     useEffect(() => {
@@ -26,6 +33,29 @@ const PasswordPage: NextPage<PasswordPageProps> = ({ decryptedPass }) => {
     if (!decryptedPass) {
         return <Loading />;
     }
+
+    /* 
+        Delete password from database
+        This is done to prevent the password from being accessed again
+    */
+    const deletePassword = async () => {
+        await fetch(baseUrl + "/api/deletePassword", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                uniqueID,
+            }),
+        }).then((res) => {
+            if (res.status !== 200) {
+                // If the password is not deleted, return notFound to prevent access
+                return {
+                    notFound: true,
+                };
+            }
+        });
+    };
 
     const copyToClipboard = (e: any) => {
         // Write to clipboard and show notification
@@ -38,6 +68,22 @@ const PasswordPage: NextPage<PasswordPageProps> = ({ decryptedPass }) => {
             e.target.classList.remove("btn-success");
             e.target.innerHTML = decryptedPass;
         }, 2000);
+    };
+
+    const onButtonClick = async (e: any) => {
+        e.preventDefault();
+
+        // Set the password to the decrypted password
+        setPass(decryptedPass);
+
+        // Automatically copy to clipboard
+        copyToClipboard(e);
+
+        // If the button has not been pressed, show the password
+        if (!hasPressed) {
+            setHasPressed(true);
+            return await deletePassword();
+        }
     };
 
     return (
@@ -55,15 +101,16 @@ const PasswordPage: NextPage<PasswordPageProps> = ({ decryptedPass }) => {
                                 here you go. Make sure to keep it safe!
                                 <br />
                                 <br />
-                                To copy the password, simply click the password
-                                in the button below.
+                                To reveal the password, simply click the
+                                password in the button below. It will be shown
+                                and automatically copied to your clipboard.
                                 <br />
                                 <br />
                                 <button
-                                    onClick={(e) => copyToClipboard(e)}
-                                    className="btn w-full break-all"
+                                    onClick={(e) => onButtonClick(e)}
+                                    className="btn w-full break-all normal-case"
                                 >
-                                    {decryptedPass}
+                                    {pass}
                                 </button>
                             </p>
                             <div className="card-actions">
@@ -103,28 +150,7 @@ export const getServerSideProps = async (ctx: { query: { uniqueID: any } }) => {
     const cipher = data.encryptedPass as CipherType;
     const decryptedPass = decryptPass(cipher);
 
-    /* 
-        Delete password from database
-        This is done server-side to prevent the password from being accessed again
-    */
-    await fetch(baseUrl + "/api/deletePassword", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            uniqueID,
-        }),
-    }).then((res) => {
-        if (res.status !== 200) {
-            // If the password is not deleted, return notFound to prevent access
-            return {
-                notFound: true,
-            };
-        }
-    });
-
-    return { props: { decryptedPass } };
+    return { props: { decryptedPass, uniqueID } };
 };
 
 export default PasswordPage;
