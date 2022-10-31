@@ -1,4 +1,4 @@
-import Loading from "@components/Loading";
+import { Loading } from "@components";
 import { CipherType, decryptPass } from "@lib/crypto";
 import { database } from "@lib/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";

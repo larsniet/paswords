@@ -1,5 +1,4 @@
-import Modal from "@components/Modal";
-import PasswordForm from "@components/PasswordForm";
+import { Modal, PasswordForm } from "@components";
 import Head from "next/head";
 import { useState } from "react";
 
