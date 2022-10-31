@@ -33,3 +33,22 @@ exports.checkPasswordsEveryMinute = functions.pubsub
 
         return null;
     });
+
+exports.onCreatePassword = functions.firestore
+    .document("passwords/{passwordId}")
+    .onCreate(async () => {
+        // Add 1 to the count of total-generated document\
+        const totalGenerated = await admin
+            .firestore()
+            .doc("counters/total-generated-passwords")
+            .get();
+
+        const totalGeneratedCount = totalGenerated.data().count;
+
+        await admin
+            .firestore()
+            .doc("counters/total-generated-passwords")
+            .update({ count: totalGeneratedCount + 1 });
+
+        return null;
+    });

@@ -5,7 +5,7 @@ import { doc, getDoc } from "firebase/firestore";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState, MouseEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import type { NextPage } from "next";
 
@@ -39,8 +39,8 @@ const PasswordPage: NextPage<PasswordPageProps> = ({
         This is done to prevent the password from being accessed again
     */
     const deletePassword = async () => {
-        await fetch(baseUrl + "/api/deletePassword", {
-            method: "POST",
+        await fetch(baseUrl + "/api/passwords", {
+            method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
             },

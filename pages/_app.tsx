@@ -2,17 +2,24 @@ import "../styles/globals.css";
 
 import { Navbar } from "@components";
 import { ThemeContextProvider } from "@themes/themeContext";
+import Head from "next/head";
 import Script from "next/script";
 import ReactGA from "react-ga";
 
 import type { AppProps } from "next/app";
-
 function MyApp({ Component, pageProps }: AppProps) {
     const measurementId = process.env.NEXT_PUBLIC_MEASUREMENT_ID;
     ReactGA.initialize(measurementId);
 
     return (
         <ThemeContextProvider>
+            <Head>
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+                />
+            </Head>
+
             <Script
                 strategy="lazyOnload"
                 id="gtagImport"
