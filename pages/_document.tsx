@@ -29,6 +29,10 @@ export default function Document() {
                 />
                 <meta name="msapplication-TileColor" content="#da532c" />
                 <meta name="theme-color" content="#ffffff" />
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+                />
             </Head>
             <body className="bg-base-200 overflow-x-hidden">
                 <Main />
