@@ -1,5 +1,5 @@
 import { Loading } from "@components";
-import { CipherType, decryptPass } from "@lib/crypto";
+import { decryptPass } from "@lib/crypto";
 import { database } from "@lib/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 import Head from "next/head";
@@ -137,8 +137,13 @@ const PasswordPage: NextPage<PasswordPageProps> = ({
     );
 };
 
-export const getServerSideProps = async (ctx: { query: { uniqueID: any } }) => {
-    const uniqueID = ctx.query.uniqueID;
+export const getServerSideProps = async (ctx: {
+    query: { uniqueID: string; iv: string };
+}) => {
+    // Get uniqueID and iv from query
+    const { uniqueID, iv } = ctx.query;
+
+    // Get the password content from the database
     const docRef = doc(database, "passwords", uniqueID);
     const docSnap = await getDoc(docRef);
     const data = docSnap.data();
@@ -147,8 +152,8 @@ export const getServerSideProps = async (ctx: { query: { uniqueID: any } }) => {
     if (!data) return { notFound: true };
 
     // Decrypt the password
-    const cipher = data.encryptedPass as CipherType;
-    const decryptedPass = decryptPass(cipher);
+    const content = data.content;
+    const decryptedPass = decryptPass(content, iv);
 
     return { props: { decryptedPass, uniqueID } };
 };

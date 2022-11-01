@@ -10,6 +10,7 @@ const seperateNumber = (x: number) => {
 
 const Home: NextPage = (props: any) => {
     const [uniqueID, setUniqueID] = useState<string>("");
+    const [iv, setIv] = useState<string>("");
     const [validInSec, setValidInSec] = useState<number>(0);
 
     const totalGenerated = seperateNumber(props.totalGenerated);
@@ -62,11 +63,12 @@ const Home: NextPage = (props: any) => {
                     </div>
                     <PasswordForm
                         setUniqueID={setUniqueID}
+                        setIv={setIv}
                         setValidInSec={setValidInSec}
                     />
                 </div>
             </div>
-            <Modal uniqueID={uniqueID} validInSec={validInSec} />
+            <Modal uniqueID={uniqueID} iv={iv} validInSec={validInSec} />
         </>
     );
 };

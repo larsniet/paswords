@@ -3,10 +3,11 @@ import React, { useEffect } from "react";
 
 type ModalProps = {
     uniqueID: string;
+    iv: string;
     validInSec: number;
 };
 
-const Modal: React.ElementType<ModalProps> = ({ uniqueID, validInSec }) => {
+const Modal: React.ElementType<ModalProps> = ({ uniqueID, iv, validInSec }) => {
     const baseURL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
     const toggleModal = () => {
@@ -18,7 +19,7 @@ const Modal: React.ElementType<ModalProps> = ({ uniqueID, validInSec }) => {
 
     const copyToClipboard = (e: any) => {
         // Write to clipboard and show notification
-        navigator.clipboard.writeText(`${baseURL}/pwd/${uniqueID}`);
+        navigator.clipboard.writeText(`${baseURL}/pwd/${uniqueID}/iv/${iv}`);
         e.target.innerHTML = "Copied!";
         e.target.classList.add("btn-success");
 
@@ -66,7 +67,7 @@ const Modal: React.ElementType<ModalProps> = ({ uniqueID, validInSec }) => {
                         erased forever.
                     </p>
                     <p className="pb-4 break-all text-blue-500">{`${
-                        baseURL + "/pwd/" + uniqueID
+                        baseURL + "/pwd/" + uniqueID + "/iv/" + iv
                     }`}</p>
                     <div className="flex justify-end space-x-3">
                         <button className="btn btn-ghost" onClick={toggleModal}>

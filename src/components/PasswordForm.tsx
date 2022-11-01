@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 type PasswordFormProps = {
     setUniqueID: (id: string) => void;
+    setIv: (iv: string) => void;
     setValidInSec: (validInSec: number) => void;
 };
 
@@ -17,6 +18,7 @@ const validTimeMapping = {
 
 const PasswordForm: React.ElementType<PasswordFormProps> = ({
     setUniqueID,
+    setIv,
     setValidInSec,
 }) => {
     const [error, setError] = useState<string>("");
@@ -76,17 +78,20 @@ const PasswordForm: React.ElementType<PasswordFormProps> = ({
     const generateLink = async () => {
         setLoading(true);
 
+        // Create analytics event for password generation
         ReactGA.event({
             category: "Home",
             action: "create_password_link",
             label: "Create Password Link",
         });
 
+        // If password is empty, show error
         if (password === "") {
             setLoading(false);
             return setError("Password cannot be empty");
         }
 
+        // Get the valid time in seconds from mapping
         const validInSec = validTimeMapping[validTime];
 
         // Hash password
@@ -100,10 +105,10 @@ const PasswordForm: React.ElementType<PasswordFormProps> = ({
                 validInSec,
             }),
         });
-        const data = await res.json();
-        const uniqueID = data.uniqueID;
+        const { uniqueID, iv } = await res.json();
 
         setUniqueID(uniqueID);
+        setIv(iv);
         setValidInSec(validInSec);
         setPassword("");
         setLoading(false);
@@ -113,6 +118,7 @@ const PasswordForm: React.ElementType<PasswordFormProps> = ({
         <div className="w-full">
             <div className="card bg-base-100 shadow-xl">
                 <div className="card-body">
+                    {/* Start password input section */}
                     <div className="form-control w-full">
                         <label className="label">
                             <span className="label-text">
@@ -149,6 +155,7 @@ const PasswordForm: React.ElementType<PasswordFormProps> = ({
                             </span>
                         </label>
                     </div>
+                    {/* End password input section */}
 
                     {/* Start password customizer */}
                     <div className="form-control">
@@ -207,6 +214,7 @@ const PasswordForm: React.ElementType<PasswordFormProps> = ({
                     </div>
                     {/* End password customizer */}
 
+                    {/* Start valid time section */}
                     <div className="form-control">
                         <label htmlFor="validTime" className="label">
                             <span className="label-text">
@@ -234,6 +242,8 @@ const PasswordForm: React.ElementType<PasswordFormProps> = ({
                             <span className="-mr-3 mt-2">3 days</span>
                         </div>
                     </div>
+                    {/* End valid time section */}
+
                     <div className="form-control w-full mt-8">
                         <button
                             onClick={() => generateLink()}
