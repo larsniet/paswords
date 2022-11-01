@@ -7,6 +7,7 @@ const dbInstance = collection(database, "passwords");
 
 type Data = {
     uniqueID?: string;
+    iv?: string;
     error?: string;
 };
 
@@ -16,20 +17,28 @@ export default function handler(
 ) {
     const validInSec = req.body.validInSec || 0;
 
-    // Encrypt password
-    const encryptedPass = encryptPass(req.body.password);
+    /* 
+    This encrypts the password and returns it in two parts like so:
+        {
+            iv: "some random string",
+            content: "some encrypted string"
+        } 
+    Together they can decrypt the password 
+    */
+    const { content, iv } = encryptPass(req.body.password);
 
     return new Promise<void>((resolve, reject) => {
-        // Save encrypted password to database
+        // Save only the content of the encrypted password to the database,
+        // this way we could never decrypt the password without the iv
         addDoc(dbInstance, {
-            encryptedPass,
+            content,
             validInSec,
         })
             .then((docRef) => {
                 // Get the unique ID from the document reference
                 const uniqueID = docRef.id;
-                // Send uniqueID to client
-                res.status(200).json({ uniqueID });
+                // Send uniqueID and the iv to client for URL generation
+                res.status(200).json({ uniqueID, iv });
                 resolve();
             })
             .catch((error) => {
