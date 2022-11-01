@@ -58,10 +58,7 @@ const PasswordForm: React.ElementType<PasswordFormProps> = ({
         setIsGenerating(true);
 
         // Create analytics event for password generation
-        logEvent(analytics, "generate_password", {
-            password_length: passwordLength,
-            password_type: passwordType,
-        });
+        logEvent(analytics, "generate_password");
 
         // Generates a random password
         const randomPassword = await fetch(
@@ -86,10 +83,7 @@ const PasswordForm: React.ElementType<PasswordFormProps> = ({
         setLoading(true);
 
         // Create analytics event for password generation
-        logEvent(analytics, "generate_link", {
-            password_length: password.length,
-            password_type: passwordType,
-        });
+        logEvent(analytics, "generate_link");
 
         // If password is empty, show error
         if (password === "") {
