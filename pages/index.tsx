@@ -79,6 +79,15 @@ export async function getServerSideProps() {
     const res = await fetch(
         process.env.NEXT_PUBLIC_BASE_URL + "/api/passwords"
     );
+
+    if (!res.ok) {
+        return {
+            props: {
+                totalGenerated: 0,
+            },
+        };
+    }
+
     const data = await res.json();
     const totalGenerated = data.count;
 

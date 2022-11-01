@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import ReactGA from "react-ga";
 import { useEffect } from "react";
+import { logEvent } from "firebase/analytics";
+import { analytics } from "@lib/firebaseConfig";
 
 type PasswordFormProps = {
     setUniqueID: (id: string) => void;
@@ -56,6 +57,12 @@ const PasswordForm: React.ElementType<PasswordFormProps> = ({
     const generatePassword = async () => {
         setIsGenerating(true);
 
+        // Create analytics event for password generation
+        logEvent(analytics, "generate_password", {
+            password_length: passwordLength,
+            password_type: passwordType,
+        });
+
         // Generates a random password
         const randomPassword = await fetch(
             process.env.NEXT_PUBLIC_BASE_URL + "/api/generatePassword",
@@ -79,10 +86,9 @@ const PasswordForm: React.ElementType<PasswordFormProps> = ({
         setLoading(true);
 
         // Create analytics event for password generation
-        ReactGA.event({
-            category: "Home",
-            action: "create_password_link",
-            label: "Create Password Link",
+        logEvent(analytics, "generate_link", {
+            password_length: password.length,
+            password_type: passwordType,
         });
 
         // If password is empty, show error
