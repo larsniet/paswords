@@ -160,6 +160,27 @@ const PasswordForm: React.ElementType<PasswordFormProps> = ({
                     {/* Start password customizer */}
                     <div className="form-control">
                         <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">
+                                    Included characters
+                                </span>
+                            </label>
+                            <select
+                                className="select w-full bg-slate-50"
+                                defaultValue={passwordType}
+                                onChange={(e) =>
+                                    setPasswordType(e.target.value)
+                                }
+                            >
+                                <option value="symbols and numbers">
+                                    Symbols and numbers
+                                </option>
+                                <option value="symbols">Symbols</option>
+                                <option value="numbers">Numbers</option>
+                                <option>None</option>
+                            </select>
+                        </div>
+                        <div className="form-control mt-2">
                             <label htmlFor="passwordLength" className="label">
                                 <span className="label-text">
                                     Password length (
@@ -189,27 +210,6 @@ const PasswordForm: React.ElementType<PasswordFormProps> = ({
                                 <span className="mt-2">40</span>
                                 <span className="mt-2">50</span>
                             </div>
-                        </div>
-                        <div className="form-control my-2">
-                            <label className="label">
-                                <span className="label-text">
-                                    Special characters
-                                </span>
-                            </label>
-                            <select
-                                className="select w-full bg-slate-50"
-                                defaultValue={passwordType}
-                                onChange={(e) =>
-                                    setPasswordType(e.target.value)
-                                }
-                            >
-                                <option value="symbols and numbers">
-                                    Symbols and numbers
-                                </option>
-                                <option>None</option>
-                                <option value="symbols">Symbols</option>
-                                <option value="numbers">Numbers</option>
-                            </select>
                         </div>
                     </div>
                     {/* End password customizer */}
