@@ -166,7 +166,7 @@ const PasswordForm: React.ElementType<PasswordFormProps> = ({
                                 </span>
                             </label>
                             <select
-                                className="select w-full bg-slate-50"
+                                className="select select-bordered w-full"
                                 defaultValue={passwordType}
                                 onChange={(e) =>
                                     setPasswordType(e.target.value)
