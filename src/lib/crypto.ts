@@ -1,4 +1,4 @@
-const crypto = require("crypto");
+import crypto from "crypto";
 
 const algorithm = "aes-256-cbc";
 const secretKey = process.env.SECRET_KEY;
