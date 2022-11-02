@@ -1,6 +1,6 @@
 import { Loading } from "@components";
 import { decryptPass } from "@lib/crypto";
-import { database } from "@lib/firebaseConfig";
+import { analytics, database } from "@lib/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 import Head from "next/head";
 import Image from "next/image";
@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 import type { NextPage } from "next";
+import { logEvent } from "firebase/analytics";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
@@ -72,6 +73,9 @@ const PasswordPage: NextPage<PasswordPageProps> = ({
 
     const onButtonClick = async (e: any) => {
         e.preventDefault();
+
+        // Create analytics event for password reveal
+        logEvent(analytics, "password_reveal");
 
         // Set the password to the decrypted password
         setPass(decryptedPass);

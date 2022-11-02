@@ -23,13 +23,18 @@ export default function Document() {
                 />
                 <link rel="manifest" href="/site.webmanifest" />
                 <link
+                    rel="sitemap"
+                    type="application/xml"
+                    title="Sitemap"
+                    href="/sitemap.xml"
+                />
+                <link
                     rel="mask-icon"
                     href="/safari-pinned-tab.svg"
                     color="#5bbad5"
                 />
                 <meta name="msapplication-TileColor" content="#da532c" />
                 <meta name="theme-color" content="#ffffff" />
-
                 <meta
                     name="keywords"
                     content="password, generator, share, link, password-share, encryption, one-time-link, open-source"
