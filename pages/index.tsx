@@ -1,9 +1,11 @@
 import { Modal, PasswordForm } from "@components";
+import { database } from "@lib/firebaseConfig";
+import { doc, getDoc } from "firebase/firestore";
 import Head from "next/head";
 import { useState } from "react";
+import { NextSeo } from "next-seo";
 
 import type { NextPage } from "next";
-
 const seperateNumber = (x: number) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 };
@@ -17,16 +19,10 @@ const Home: NextPage = (props: any) => {
 
     return (
         <>
-            <Head>
-                <title>
-                    Paswords. The safest way to send passwords over the
-                    internet.
-                </title>
-                <meta
-                    name="description"
-                    content="Paswords allows users from all over the world to share passwords in a secure way. Using our one-time-only link feature no-one gets access to your password except the people you choose."
-                />
-            </Head>
+            <NextSeo
+                title="Paswords. Generate and share passwords the safe way."
+                description="Paswords allows users from all over the world to share passwords in a secure way. Using our one-time-only link no-one gets access to your password."
+            />
             <div className="hero items-start sm:items-center">
                 <div className="hero-content flex-col lg:flex-row">
                     <div>
@@ -75,21 +71,21 @@ const Home: NextPage = (props: any) => {
 
 export default Home;
 
-export async function getServerSideProps() {
-    const res = await fetch(
-        process.env.NEXT_PUBLIC_BASE_URL + "/api/passwords"
+export async function getStaticProps() {
+    // Get the passwords count
+    const passwordsCount = await getDoc(
+        doc(database, "counters", "total-generated-passwords")
     );
-
-    if (!res.ok) {
+    // Check if the passwords count exists
+    if (!passwordsCount.data()) {
         return {
             props: {
                 totalGenerated: 0,
             },
         };
     }
-
-    const data = await res.json();
-    const totalGenerated = data.count;
+    // Return the passwords count
+    const totalGenerated = passwordsCount.data().count;
 
     return {
         props: { totalGenerated },

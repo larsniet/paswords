@@ -29,6 +29,17 @@ export default function Document() {
                 />
                 <meta name="msapplication-TileColor" content="#da532c" />
                 <meta name="theme-color" content="#ffffff" />
+
+                <meta
+                    name="keywords"
+                    content="password, generator, share, link, password-share, encryption, one-time-link, open-source"
+                />
+                <meta name="robots" content="index, follow" />
+                <meta
+                    httpEquiv="Content-Type"
+                    content="text/html; charset=utf-8"
+                />
+                <meta name="language" content="English" />
             </Head>
             <body className="bg-base-200 overflow-x-hidden">
                 <Main />
