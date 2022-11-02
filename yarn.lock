@@ -1042,6 +1042,11 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
+"@corex/deepmerge@^4.0.29":
+  version "4.0.29"
+  resolved "https://registry.yarnpkg.com/@corex/deepmerge/-/deepmerge-4.0.29.tgz#af9debf07d7f6b0d2a9d04a266abf2c1418ed2f6"
+  integrity sha512-q/yVUnqckA8Do+EvAfpy7RLdumnBy9ZsducMUtZTvpdbJC7azEf1hGtnYYxm0QfphYxjwggv6XtH64prvS1W+A==
+
 "@eslint/eslintrc@^1.3.3":
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-1.3.3.tgz#2b044ab39fdfa75b4688184f9e573ce3c5b0ff95"
@@ -3947,6 +3952,14 @@ next-seo@^5.13.0:
   version "5.13.0"
   resolved "https://registry.yarnpkg.com/next-seo/-/next-seo-5.13.0.tgz#69c0773ce7b641e719173d4f32a9758711d62b6b"
   integrity sha512-3n6cOjXydxXlrbMIWcU+D6TllKj72C2rg7IdgoxoKOnfC8ah3U0VUIGRApKXK0wi5ME1m+TBq9isAFFbFdbWXQ==
+
+next-sitemap@^3.1.30:
+  version "3.1.30"
+  resolved "https://registry.yarnpkg.com/next-sitemap/-/next-sitemap-3.1.30.tgz#6f81699a3d07366bf6df0da6f9f3fe34de4e67e6"
+  integrity sha512-mZqq9xWrTp/tgUM7+Oz/qxT6x2vnJhwQ3AGke2GjypRbUo44QaTb+4Cp1uX9GwXBaiuuuXDoWyS5VxJP3pJljw==
+  dependencies:
+    "@corex/deepmerge" "^4.0.29"
+    minimist "^1.2.6"
 
 next@12.3.2:
   version "12.3.2"

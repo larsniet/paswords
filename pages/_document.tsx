@@ -34,7 +34,6 @@ export default function Document() {
                     name="keywords"
                     content="password, generator, share, link, password-share, encryption, one-time-link, open-source"
                 />
-                <meta name="robots" content="index, follow" />
                 <meta
                     httpEquiv="Content-Type"
                     content="text/html; charset=utf-8"
