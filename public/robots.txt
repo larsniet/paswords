@@ -7,7 +7,7 @@ User-agent: *
 Disallow: /pwd
 
 # Host
-Host: http://localhost:3000
+Host: https://paswords.link
 
 # Sitemaps
-Sitemap: http://localhost:3000/sitemap.xml
+Sitemap: https://paswords.link/sitemap.xml
